@@ -45,6 +45,15 @@ boolean AccelStepper::runSpeed()
 	return false;
 
     unsigned long time = micros();   
+
+    unsigned long elapsed = time - _lastStepTime;
+
+    // handle weird bug when _lastStepTime is few us bigger than time
+    if (elapsed > UINT32_MAX / 2)
+    {
+        elapsed += _stepInterval;
+    }
+
     if (time - _lastStepTime >= _stepInterval)
     {
 	if (_direction == DIRECTION_CW)
