@@ -54,7 +54,7 @@ boolean AccelStepper::runSpeed()
         elapsed += _stepInterval;
     }
 
-    if (time - _lastStepTime >= _stepInterval)
+    if (elapsed >= _stepInterval)
     {
 	if (_direction == DIRECTION_CW)
 	{
