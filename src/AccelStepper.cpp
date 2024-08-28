@@ -49,9 +49,9 @@ boolean AccelStepper::runSpeed()
     unsigned long elapsed = time - _lastStepTime;
 
     // handle weird bug when _lastStepTime is few us bigger than time
-    if (elapsed > UINT32_MAX / 2)
+    if (elapsed > UINT32_MAX / 8)
     {
-        elapsed += _stepInterval;
+        return false;
     }
 
     if (elapsed >= _stepInterval)
@@ -685,4 +685,9 @@ void AccelStepper::stop()
 bool AccelStepper::isRunning()
 {
     return !(_speed == 0.0 && _targetPos == _currentPos);
+}
+
+void AccelStepper::resetLastStep()
+{
+    _lastStepTime = micros();
 }

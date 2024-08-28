@@ -554,6 +554,8 @@ public:
     /// \return true if the speed is not zero or not at the target position
     bool    isRunning();
 
+    void resetLastStep();
+
     /// Virtual destructor to prevent warnings during delete
     virtual ~AccelStepper() {};
 protected:
